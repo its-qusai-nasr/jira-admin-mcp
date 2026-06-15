@@ -1,0 +1,76 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "jira-admin-mcp"
+version = "0.1.0"
+description = "A Model Context Protocol (MCP) server giving AI assistants 78 tools to administer a Jira Cloud site: issues, users, groups, projects, permissions, custom fields, workflows, screens, filters, and bulk operations."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Qusai Nasr" }]
+keywords = [
+    "mcp",
+    "model-context-protocol",
+    "jira",
+    "atlassian",
+    "jira-cloud",
+    "llm",
+    "claude",
+    "fastmcp",
+    "ai-agent",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: System Administrators",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: Utilities",
+]
+dependencies = [
+    "fastmcp>=2.0.0",
+    "httpx>=0.27.0",
+    "python-dotenv>=1.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.23",
+    "ruff>=0.6",
+]
+
+[project.scripts]
+jira-mcp = "jira_mcp.server:main"
+
+[project.urls]
+Homepage = "https://github.com/OWNER/jira-admin-mcp"
+Repository = "https://github.com/OWNER/jira-admin-mcp"
+Issues = "https://github.com/OWNER/jira-admin-mcp/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["jira_mcp"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+# Pragmatic rule set: pyflakes (real bugs), pycodestyle errors, pyupgrade, and
+# flake8-bugbear. E501 (line length) is left to the formatter. B904 (explicit
+# exception chaining) is disabled on purpose: the tool error handlers re-raise
+# as ToolError without `from e`, which is intentional and not worth the churn.
+# Import sorting (I) is left off to keep the vendored module layout untouched.
+select = ["E", "F", "UP", "B"]
+ignore = ["E501", "B904"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
