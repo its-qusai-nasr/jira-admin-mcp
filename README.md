@@ -3,7 +3,7 @@
 [![PyPI version](https://img.shields.io/pypi/v/jira-admin-mcp.svg)](https://pypi.org/project/jira-admin-mcp/)
 [![Python](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![CI](https://github.com/OWNER/jira-admin-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/OWNER/jira-admin-mcp/actions/workflows/ci.yml)
+[![CI](https://github.com/its-qusai-nasr/jira-admin-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/its-qusai-nasr/jira-admin-mcp/actions/workflows/ci.yml)
 [![MCP](https://img.shields.io/badge/MCP-server-000.svg)](https://modelcontextprotocol.io)
 
 A [Model Context Protocol](https://modelcontextprotocol.io) server that gives an AI assistant (Claude, Cursor, VS Code, or any MCP client) **78 purpose-built tools to administer a Jira Cloud site** - not just read and create tickets, but the behind-the-scenes admin work: custom fields and where they appear, permission schemes, workflows, screens, issue-type schemes, groups, project roles, saved filters, and bulk operations.
@@ -29,7 +29,7 @@ Add this to your MCP client config (see [client setup](#client-setup) for file l
   "mcpServers": {
     "jira-admin": {
       "command": "uvx",
-      "args": ["--from", "git+https://github.com/OWNER/jira-admin-mcp", "jira-mcp"],
+      "args": ["--from", "git+https://github.com/its-qusai-nasr/jira-admin-mcp", "jira-mcp"],
       "env": {
         "JIRA_BASE_URL": "https://your-company.atlassian.net",
         "JIRA_EMAIL": "you@your-company.com",
@@ -61,7 +61,7 @@ Add this to your MCP client config (see [client setup](#client-setup) for file l
 ### Option C - clone for development
 
 ```bash
-git clone https://github.com/OWNER/jira-admin-mcp
+git clone https://github.com/its-qusai-nasr/jira-admin-mcp
 cd jira-admin-mcp
 uv sync                 # creates .venv and installs deps from uv.lock
 cp .env.example .env    # then edit .env with your Jira credentials
@@ -340,5 +340,5 @@ Issues and PRs welcome. See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 [MIT](LICENSE)
 
-<!-- mcp-name: io.github.OWNER/jira-admin-mcp -->
+<!-- mcp-name: io.github.its-qusai-nasr/jira-admin-mcp -->
 

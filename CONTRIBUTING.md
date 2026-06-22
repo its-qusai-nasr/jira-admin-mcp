@@ -7,7 +7,7 @@ Thanks for your interest in improving the Jira Admin MCP server.
 This project uses [uv](https://docs.astral.sh/uv/).
 
 ```bash
-git clone https://github.com/OWNER/jira-admin-mcp
+git clone https://github.com/its-qusai-nasr/jira-admin-mcp
 cd jira-admin-mcp
 uv sync --extra dev        # installs runtime + dev dependencies into .venv
 cp .env.example .env       # add your own Jira credentials for live testing

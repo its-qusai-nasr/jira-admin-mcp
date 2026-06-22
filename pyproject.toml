@@ -51,9 +51,9 @@ dev = [
 jira-mcp = "jira_mcp.server:main"
 
 [project.urls]
-Homepage = "https://github.com/OWNER/jira-admin-mcp"
-Repository = "https://github.com/OWNER/jira-admin-mcp"
-Issues = "https://github.com/OWNER/jira-admin-mcp/issues"
+Homepage = "https://github.com/its-qusai-nasr/jira-admin-mcp"
+Repository = "https://github.com/its-qusai-nasr/jira-admin-mcp"
+Issues = "https://github.com/its-qusai-nasr/jira-admin-mcp/issues"
 
 [tool.hatch.build.targets.wheel]
 packages = ["jira_mcp"]

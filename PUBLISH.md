@@ -1,32 +1,22 @@
 # Publishing checklist
 
-This repo is ready to publish. A few values use the placeholder `OWNER` because
-the GitHub owner/repo was not decided yet. Do the find-and-replace first, then
-work down the list.
+This repo is ready to publish. Owner/repo are already set to
+`its-qusai-nasr/jira-admin-mcp` throughout (README, pyproject, server.json,
+CONTRIBUTING). Start at step 1.
 
-## 0. Replace the `OWNER` placeholder
+## 0. (done) OWNER placeholder replaced
 
-Pick your GitHub owner (and repo name, if not `jira-admin-mcp`) and replace
-`OWNER` everywhere:
-
-```bash
-# from the repo root - macOS/Linux
-grep -rl 'OWNER' . --exclude-dir=.git | xargs sed -i '' 's#OWNER#your-gh-username#g'   # macOS
-# or: ... | xargs sed -i 's#OWNER#your-gh-username#g'                                   # Linux
-```
-
-Files that contain it: `README.md`, `pyproject.toml`, `server.json`,
-`CONTRIBUTING.md`. (Windows: use your editor's project-wide replace.)
-
-If you also rename the repo (e.g. to `mcp-jira-admin`), update the same files
-and, if you want the PyPI/import names to match, also the `name` in
-`pyproject.toml` and the package dir `jira_mcp/`.
+All URLs, badges, and the `mcp-name:` marker now point at
+`https://github.com/its-qusai-nasr/jira-admin-mcp`. Nothing to do here unless
+you rename the repo - in which case update those same files and, to keep the
+PyPI/import names matching, also `name` in `pyproject.toml` and the `jira_mcp/`
+package dir.
 
 ## 1. Create the GitHub repo and push
 
 ```bash
-git remote add origin https://github.com/your-gh-username/jira-admin-mcp.git
-git push -u origin master   # or: main
+git remote add origin https://github.com/its-qusai-nasr/jira-admin-mcp.git
+git push -u origin main
 ```
 
 CI (`.github/workflows/ci.yml`) runs lint + tests on Python 3.10-3.13 automatically.
@@ -37,7 +27,7 @@ CI (`.github/workflows/ci.yml`) runs lint + tests on Python 3.10-3.13 automatica
    taken, change `name` in `pyproject.toml` and the docs).
 2. On PyPI: **Your projects -> jira-admin-mcp -> Publishing -> Add a pending
    publisher**:
-   - Owner: `your-gh-username`
+   - Owner: `its-qusai-nasr`
    - Repository: `jira-admin-mcp`
    - Workflow: `publish.yml`
    - Environment: `pypi`
@@ -54,8 +44,8 @@ git push origin v0.1.0
 PyPI release is live:
 
 1. Install the registry CLI: see <https://github.com/modelcontextprotocol/registry>.
-2. Authenticate with GitHub (this proves ownership of the `io.github.OWNER/...`
-   namespace) and publish:
+2. Authenticate with GitHub (this proves ownership of the
+   `io.github.its-qusai-nasr/...` namespace) and publish:
 
 ```bash
 mcp-publisher login github
