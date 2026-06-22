@@ -3,6 +3,9 @@
 .env.*
 !.env.example
 
+# Local client config (machine-specific, not for the published repo)
+.mcp.json
+
 # Python
 __pycache__/
 *.py[cod]
