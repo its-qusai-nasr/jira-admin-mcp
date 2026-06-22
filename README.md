@@ -1,6 +1,5 @@
 # Jira Admin MCP Server
 
-[![PyPI version](https://img.shields.io/pypi/v/jira-admin-mcp.svg)](https://pypi.org/project/jira-admin-mcp/)
 [![Python](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![CI](https://github.com/its-qusai-nasr/jira-admin-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/its-qusai-nasr/jira-admin-mcp/actions/workflows/ci.yml)
@@ -20,7 +19,7 @@ You need three things from your own Jira: a **base URL**, your **account email**
 
 The easiest way to run an MCP server today is [`uv`](https://docs.astral.sh/uv/) / `uvx` - it handles Python and dependencies for you, no manual virtualenv. [Install uv](https://docs.astral.sh/uv/getting-started/installation/) first, then pick one of the options below.
 
-### Option A - run straight from GitHub (no clone, no PyPI)
+### Option A - run straight from GitHub (no clone needed)
 
 Add this to your MCP client config (see [client setup](#client-setup) for file locations):
 
@@ -40,25 +39,7 @@ Add this to your MCP client config (see [client setup](#client-setup) for file l
 }
 ```
 
-### Option B - from PyPI (once published)
-
-```json
-{
-  "mcpServers": {
-    "jira-admin": {
-      "command": "uvx",
-      "args": ["jira-admin-mcp"],
-      "env": {
-        "JIRA_BASE_URL": "https://your-company.atlassian.net",
-        "JIRA_EMAIL": "you@your-company.com",
-        "JIRA_API_TOKEN": "your_api_token_here"
-      }
-    }
-  }
-}
-```
-
-### Option C - clone for development
+### Option B - clone for development
 
 ```bash
 git clone https://github.com/its-qusai-nasr/jira-admin-mcp
