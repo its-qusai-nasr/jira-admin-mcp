@@ -1,5 +1,6 @@
 # Jira Admin MCP Server
 
+[![PyPI version](https://img.shields.io/pypi/v/jira-admin-mcp.svg)](https://pypi.org/project/jira-admin-mcp/)
 [![Python](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![CI](https://github.com/its-qusai-nasr/jira-admin-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/its-qusai-nasr/jira-admin-mcp/actions/workflows/ci.yml)
@@ -24,7 +25,7 @@ Then add the server with the one-click button or one-line command for your tool,
 
 ### Cursor
 
-[![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en/install-mcp?name=jira-admin&config=eyJjb21tYW5kIjoidXZ4IiwiYXJncyI6WyItLWZyb20iLCJnaXQraHR0cHM6Ly9naXRodWIuY29tL2l0cy1xdXNhaS1uYXNyL2ppcmEtYWRtaW4tbWNwIiwiamlyYS1tY3AiXSwiZW52Ijp7IkpJUkFfQkFTRV9VUkwiOiJodHRwczovL3lvdXItY29tcGFueS5hdGxhc3NpYW4ubmV0IiwiSklSQV9FTUFJTCI6InlvdUB5b3VyLWNvbXBhbnkuY29tIiwiSklSQV9BUElfVE9LRU4iOiJ5b3VyX2FwaV90b2tlbl9oZXJlIn19)
+[![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en/install-mcp?name=jira-admin&config=eyJjb21tYW5kIjoidXZ4IiwiYXJncyI6WyJqaXJhLWFkbWluLW1jcCJdLCJlbnYiOnsiSklSQV9CQVNFX1VSTCI6Imh0dHBzOi8veW91ci1jb21wYW55LmF0bGFzc2lhbi5uZXQiLCJKSVJBX0VNQUlMIjoieW91QHlvdXItY29tcGFueS5jb20iLCJKSVJBX0FQSV9UT0tFTiI6InlvdXJfYXBpX3Rva2VuX2hlcmUifX0%3D)
 
 Click the button, confirm in Cursor, then open `~/.cursor/mcp.json` (or **Cursor Settings -> MCP**) and set `JIRA_BASE_URL`, `JIRA_EMAIL`, and `JIRA_API_TOKEN` on the `jira-admin` entry.
 
@@ -38,15 +39,15 @@ claude mcp add --scope user \
   --env JIRA_EMAIL=you@your-company.com \
   --env JIRA_API_TOKEN=your_api_token_here \
   --transport stdio jira-admin \
-  -- uvx --from git+https://github.com/its-qusai-nasr/jira-admin-mcp jira-mcp
+  -- uvx jira-admin-mcp
 ```
 
 `--scope user` makes it available in every project; drop it to add only to the current one. Check with `claude mcp list`.
 
 ### VS Code
 
-[![Install in VS Code](https://img.shields.io/badge/VS_Code-Install_jira--admin-0098FF?logo=visualstudiocode&logoColor=white)](vscode:mcp/install?%7B%22name%22%3A%22jira-admin%22%2C%22type%22%3A%22stdio%22%2C%22command%22%3A%22uvx%22%2C%22args%22%3A%5B%22--from%22%2C%22git%2Bhttps%3A%2F%2Fgithub.com%2Fits-qusai-nasr%2Fjira-admin-mcp%22%2C%22jira-mcp%22%5D%2C%22env%22%3A%7B%22JIRA_BASE_URL%22%3A%22https%3A%2F%2Fyour-company.atlassian.net%22%2C%22JIRA_EMAIL%22%3A%22you%40your-company.com%22%2C%22JIRA_API_TOKEN%22%3A%22your_api_token_here%22%7D%7D)
-[![Install in VS Code Insiders](https://img.shields.io/badge/VS_Code_Insiders-Install-24bfa5?logo=visualstudiocode&logoColor=white)](vscode-insiders:mcp/install?%7B%22name%22%3A%22jira-admin%22%2C%22type%22%3A%22stdio%22%2C%22command%22%3A%22uvx%22%2C%22args%22%3A%5B%22--from%22%2C%22git%2Bhttps%3A%2F%2Fgithub.com%2Fits-qusai-nasr%2Fjira-admin-mcp%22%2C%22jira-mcp%22%5D%2C%22env%22%3A%7B%22JIRA_BASE_URL%22%3A%22https%3A%2F%2Fyour-company.atlassian.net%22%2C%22JIRA_EMAIL%22%3A%22you%40your-company.com%22%2C%22JIRA_API_TOKEN%22%3A%22your_api_token_here%22%7D%7D)
+[![Install in VS Code](https://img.shields.io/badge/VS_Code-Install_jira--admin-0098FF?logo=visualstudiocode&logoColor=white)](vscode:mcp/install?%7B%22name%22%3A%22jira-admin%22%2C%22type%22%3A%22stdio%22%2C%22command%22%3A%22uvx%22%2C%22args%22%3A%5B%22jira-admin-mcp%22%5D%2C%22env%22%3A%7B%22JIRA_BASE_URL%22%3A%22https%3A%2F%2Fyour-company.atlassian.net%22%2C%22JIRA_EMAIL%22%3A%22you%40your-company.com%22%2C%22JIRA_API_TOKEN%22%3A%22your_api_token_here%22%7D%7D)
+[![Install in VS Code Insiders](https://img.shields.io/badge/VS_Code_Insiders-Install-24bfa5?logo=visualstudiocode&logoColor=white)](vscode-insiders:mcp/install?%7B%22name%22%3A%22jira-admin%22%2C%22type%22%3A%22stdio%22%2C%22command%22%3A%22uvx%22%2C%22args%22%3A%5B%22jira-admin-mcp%22%5D%2C%22env%22%3A%7B%22JIRA_BASE_URL%22%3A%22https%3A%2F%2Fyour-company.atlassian.net%22%2C%22JIRA_EMAIL%22%3A%22you%40your-company.com%22%2C%22JIRA_API_TOKEN%22%3A%22your_api_token_here%22%7D%7D)
 
 After installing, set your `JIRA_*` values on the `jira-admin` entry in `.vscode/mcp.json` (or your user `mcp.json`).
 
@@ -59,7 +60,7 @@ Add this block to the client's MCP config:
   "mcpServers": {
     "jira-admin": {
       "command": "uvx",
-      "args": ["--from", "git+https://github.com/its-qusai-nasr/jira-admin-mcp", "jira-mcp"],
+      "args": ["jira-admin-mcp"],
       "env": {
         "JIRA_BASE_URL": "https://your-company.atlassian.net",
         "JIRA_EMAIL": "you@your-company.com",
@@ -69,6 +70,8 @@ Add this block to the client's MCP config:
   }
 }
 ```
+
+> Want the unreleased `main` instead of the PyPI release? Replace `"args": ["jira-admin-mcp"]` with `"args": ["--from", "git+https://github.com/its-qusai-nasr/jira-admin-mcp", "jira-mcp"]`.
 
 Config file locations: **Claude Desktop** `claude_desktop_config.json` (macOS `~/Library/Application Support/Claude/`, Windows `%APPDATA%\Claude\`); **Cursor** `~/.cursor/mcp.json`; **VS Code** `.vscode/mcp.json` (note: VS Code uses a top-level `"servers"` key instead of `"mcpServers"`). Restart the client after editing; the server appears as `jira-admin` with all 78 tools.
 
