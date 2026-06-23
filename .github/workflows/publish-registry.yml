@@ -27,6 +27,20 @@ jobs:
       - name: Validate server.json
         run: ./mcp-publisher validate
 
+      - name: Wait for the matching PyPI release to be live
+        # On tag pushes this workflow and publish.yml start together; the
+        # registry rejects a version whose PyPI package is not yet published,
+        # so poll the version-specific PyPI endpoint before publishing.
+        run: |
+          VER=$(python3 -c "import json;print(json.load(open('server.json'))['version'])")
+          echo "Waiting for jira-admin-mcp $VER on PyPI..."
+          for i in $(seq 1 40); do
+            code=$(curl -s -o /dev/null -w "%{http_code}" "https://pypi.org/pypi/jira-admin-mcp/$VER/json")
+            if [ "$code" = "200" ]; then echo "PyPI $VER is live"; exit 0; fi
+            echo "  not yet ($i/40, http $code), sleeping 15s"; sleep 15
+          done
+          echo "Timed out waiting for PyPI $VER"; exit 1
+
       - name: Login (GitHub Actions OIDC)
         run: ./mcp-publisher login github-oidc
 
