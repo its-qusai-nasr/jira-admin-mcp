@@ -15,13 +15,44 @@ Most Jira MCP servers cover everyday usage. This one covers **administration**, 
 
 ## Quick start
 
-You need three things from your own Jira: a **base URL**, your **account email**, and an **API token** ([create one here](https://id.atlassian.com/manage-profile/security/api-tokens)). The token inherits your Jira permissions, so for admin tasks use an account with the right access.
+Two prerequisites, both one-time and quick:
 
-The easiest way to run an MCP server today is [`uv`](https://docs.astral.sh/uv/) / `uvx` - it handles Python and dependencies for you, no manual virtualenv. [Install uv](https://docs.astral.sh/uv/getting-started/installation/) first, then pick one of the options below.
+1. An Atlassian **API token** (it inherits your Jira permissions, so use an account with the access you need): [create one here](https://id.atlassian.com/manage-profile/security/api-tokens).
+2. [`uv`](https://docs.astral.sh/uv/getting-started/installation/) installed (one line; it manages Python and dependencies for you, no virtualenv).
 
-### Option A - run straight from GitHub (no clone needed)
+Then add the server with the one-click button or one-line command for your tool, and fill in your three `JIRA_*` values.
 
-Add this to your MCP client config (see [client setup](#client-setup) for file locations):
+### Cursor
+
+[![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en/install-mcp?name=jira-admin&config=eyJjb21tYW5kIjoidXZ4IiwiYXJncyI6WyItLWZyb20iLCJnaXQraHR0cHM6Ly9naXRodWIuY29tL2l0cy1xdXNhaS1uYXNyL2ppcmEtYWRtaW4tbWNwIiwiamlyYS1tY3AiXSwiZW52Ijp7IkpJUkFfQkFTRV9VUkwiOiJodHRwczovL3lvdXItY29tcGFueS5hdGxhc3NpYW4ubmV0IiwiSklSQV9FTUFJTCI6InlvdUB5b3VyLWNvbXBhbnkuY29tIiwiSklSQV9BUElfVE9LRU4iOiJ5b3VyX2FwaV90b2tlbl9oZXJlIn19)
+
+Click the button, confirm in Cursor, then open `~/.cursor/mcp.json` (or **Cursor Settings -> MCP**) and set `JIRA_BASE_URL`, `JIRA_EMAIL`, and `JIRA_API_TOKEN` on the `jira-admin` entry.
+
+### Claude Code
+
+One command (swap in your own three values):
+
+```bash
+claude mcp add --scope user \
+  --env JIRA_BASE_URL=https://your-company.atlassian.net \
+  --env JIRA_EMAIL=you@your-company.com \
+  --env JIRA_API_TOKEN=your_api_token_here \
+  --transport stdio jira-admin \
+  -- uvx --from git+https://github.com/its-qusai-nasr/jira-admin-mcp jira-mcp
+```
+
+`--scope user` makes it available in every project; drop it to add only to the current one. Check with `claude mcp list`.
+
+### VS Code
+
+[![Install in VS Code](https://img.shields.io/badge/VS_Code-Install_jira--admin-0098FF?logo=visualstudiocode&logoColor=white)](vscode:mcp/install?%7B%22name%22%3A%22jira-admin%22%2C%22type%22%3A%22stdio%22%2C%22command%22%3A%22uvx%22%2C%22args%22%3A%5B%22--from%22%2C%22git%2Bhttps%3A%2F%2Fgithub.com%2Fits-qusai-nasr%2Fjira-admin-mcp%22%2C%22jira-mcp%22%5D%2C%22env%22%3A%7B%22JIRA_BASE_URL%22%3A%22https%3A%2F%2Fyour-company.atlassian.net%22%2C%22JIRA_EMAIL%22%3A%22you%40your-company.com%22%2C%22JIRA_API_TOKEN%22%3A%22your_api_token_here%22%7D%7D)
+[![Install in VS Code Insiders](https://img.shields.io/badge/VS_Code_Insiders-Install-24bfa5?logo=visualstudiocode&logoColor=white)](vscode-insiders:mcp/install?%7B%22name%22%3A%22jira-admin%22%2C%22type%22%3A%22stdio%22%2C%22command%22%3A%22uvx%22%2C%22args%22%3A%5B%22--from%22%2C%22git%2Bhttps%3A%2F%2Fgithub.com%2Fits-qusai-nasr%2Fjira-admin-mcp%22%2C%22jira-mcp%22%5D%2C%22env%22%3A%7B%22JIRA_BASE_URL%22%3A%22https%3A%2F%2Fyour-company.atlassian.net%22%2C%22JIRA_EMAIL%22%3A%22you%40your-company.com%22%2C%22JIRA_API_TOKEN%22%3A%22your_api_token_here%22%7D%7D)
+
+After installing, set your `JIRA_*` values on the `jira-admin` entry in `.vscode/mcp.json` (or your user `mcp.json`).
+
+### Any other MCP client (manual)
+
+Add this block to the client's MCP config:
 
 ```json
 {
@@ -39,7 +70,9 @@ Add this to your MCP client config (see [client setup](#client-setup) for file l
 }
 ```
 
-### Option B - clone for development
+Config file locations: **Claude Desktop** `claude_desktop_config.json` (macOS `~/Library/Application Support/Claude/`, Windows `%APPDATA%\Claude\`); **Cursor** `~/.cursor/mcp.json`; **VS Code** `.vscode/mcp.json` (note: VS Code uses a top-level `"servers"` key instead of `"mcpServers"`). Restart the client after editing; the server appears as `jira-admin` with all 78 tools.
+
+### Local clone (for development)
 
 ```bash
 git clone https://github.com/its-qusai-nasr/jira-admin-mcp
@@ -47,19 +80,6 @@ cd jira-admin-mcp
 uv sync                 # creates .venv and installs deps from uv.lock
 cp .env.example .env    # then edit .env with your Jira credentials
 uv run jira-mcp         # starts the server over stdio
-```
-
-With a cloned checkout, point your client at it:
-
-```json
-{
-  "mcpServers": {
-    "jira-admin": {
-      "command": "uv",
-      "args": ["run", "--directory", "/absolute/path/to/jira-admin-mcp", "jira-mcp"]
-    }
-  }
-}
 ```
 
 ---
@@ -76,21 +96,6 @@ The server reads its settings from environment variables (passed via the `env` b
 | `JIRA_DRY_RUN` | no | `true` simulates all writes (POST/PUT/DELETE) and returns the payload that *would* be sent, without calling Jira. Defaults to `false`. |
 
 > **Tip:** set `JIRA_DRY_RUN=true` for your first session. Every write tool will return a `{"dry_run": true, "would_call": ...}` preview so you can watch what the agent intends to do before letting it touch live data.
-
----
-
-## Client setup
-
-Add the JSON block from the [Quick start](#quick-start) to your client's MCP config:
-
-- **Claude Desktop** - `claude_desktop_config.json`
-  - macOS: `~/Library/Application Support/Claude/claude_desktop_config.json`
-  - Windows: `%APPDATA%\Claude\claude_desktop_config.json`
-- **Claude Code** - a `.mcp.json` file at your project root (or `claude mcp add`)
-- **Cursor** - `~/.cursor/mcp.json` (global) or `.cursor/mcp.json` (per project)
-- **VS Code** - `.vscode/mcp.json` (uses a top-level `"servers"` key instead of `"mcpServers"`)
-
-Restart the client after editing the config. The server appears as `jira-admin` with all 78 tools.
 
 ---
 
